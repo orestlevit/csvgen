@@ -3,7 +3,7 @@ $(document).ready(function() {
         let formId = $("#id_column_set-TOTAL_FORMS").val();
         let emptyFormHtml = $("#empty-form").html();
         $("#form-set").append(emptyFormHtml.replace(/__prefix__/g, formId));
-        $("#id_column_set-TOTAL_FORMS").val(parsInt(formId) + 1);
+        $("#id_column_set-TOTAL_FORMS").val(parseInt(formId) + 1);
         $("[id$='type']").change((e) => {
             range_appear(e.target)
     })
@@ -18,6 +18,7 @@ const range_appear = (columnType) => {
     let row = $(columnType).parents(".form-inline");
     let from = $(row).find("[id$='range_from']");
     let to = $(row).find("[id$='range_to']");
+    console.log($(columnType).val());
     if ($(columnType).val() === "2" || $(columnType).val() === "3") {
           from.parents(".form-group").show();
           to.parents(".form-group").show();

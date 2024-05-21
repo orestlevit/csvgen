@@ -20,7 +20,7 @@ column_formset = inlineformset_factory(
             "range_from": "From",
             "range_to": "To",
             },
-    extra=1
+    extra=0
 )
 
 class SchemeView(LoginRequiredMixin, ListView):
@@ -51,7 +51,7 @@ class CreateSchemeView(LoginRequiredMixin, CreateView):
     model = Scheme
     fields = ["title", "column_separator", "string_character"]
     success_url = "/schemes"
-    template_name = "create_scheme.html"
+    template_name = "new-schema.html"
 
     def get_context_data(self, **kwargs):
         context = super(CreateSchemeView, self).get_context_data(**kwargs)
