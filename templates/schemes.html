@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="d-flex justify-content-between pb-3">
+        <h3>Shames</h3>
+        <a href="/new-scheme" class="btn btn-primary">New Scheme</a>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Modified</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for object in object_list %}
+                <tr>
+                    <th scope="col">{{ object.id }}</th>
+                <td>{{ object.title }}</td>
+                <td>{{ object.update_at }} </td>
+                <td>
+                    <a href="/edit/{{ object.id }}" class="btn btn-warning mx-3">Edit Scheme</a>
+                    <a href="/delete/{{ object.id }}" class="btn btn-warning mx-3">Delete Scheme</a>
+                </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
