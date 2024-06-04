@@ -16,10 +16,10 @@ def generate_data_task(dataset_id):
         return
 
     schema = Scheme.objects.filter(id=dataset.scheme_id).first()
-    columns = Column.objects.filter(schema_id=schema.id).order_by("order").values()
+    columns = Column.objects.filter(scheme_id=schema.id).order_by("order").values()
     separator = schema.column_separator
     quote = schema.string_character
-    row_number = schema.rows
+    row_number = dataset.rows
     header = []
     all_rows = []
     url = ""
@@ -29,7 +29,7 @@ def generate_data_task(dataset_id):
     for row in range(row_number):
         simple_row = []
         for column in columns:
-            column_type = type["type"]
+            column_type = column["type"]
             if column_type == 0:
                 data = fake.name()
             elif column_type == 1:

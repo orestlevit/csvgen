@@ -18,9 +18,9 @@
         <tbody>
             {% for object in object_list %}
                 <tr>
-                    <th scope="col">{{ object.id }}</th>
-                <td>{{ object.title }}</td>
-                <td>{{ object.update_at }} </td>
+                    <th width="100" scope="col">{{ object.id }}</th>
+                <td width="300"><a href="/schemes/{{ object.id }}">{{ object.title }}</a></td>
+                <td>{{ object.updated_at }} </td>
                 <td>
                     <a href="/edit/{{ object.id }}" class="btn btn-warning mx-3">Edit Scheme</a>
                     <a href="/delete/{{ object.id }}" class="btn btn-warning mx-3">Delete Scheme</a>

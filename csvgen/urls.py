@@ -29,6 +29,7 @@ urlpatterns = [
     path('logout/', LogoutView.as_view()),
     path('delete/<int:pk>', views.DeleteSchemeView.as_view()),
     path('new-scheme/', views.CreateSchemeView.as_view()),
+    path('schemes/<int:pk>', views.DataSetView.as_view()),
 
 
 
