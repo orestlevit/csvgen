@@ -3,9 +3,11 @@ from faker import Faker
 
 from core.choices import STATUS_CHOICES
 from core.models import DataSet, Scheme, Column
+from csvgen.celery import app
 from csvgen.settings import MEDIA_ROOT
 
 
+@app.task()
 def generate_data_task(dataset_id):
     fake = Faker()
     dataset = DataSet.objects.filter(id=dataset_id).first()
@@ -70,5 +72,3 @@ def generate_data_task(dataset_id):
             dataset.save()
     dataset.download_url = url
     dataset.save()
-
-

@@ -1,0 +1,30 @@
+version: "3"
+
+services:
+  web:
+    build: app
+    container_name: csvgen
+    command:
+      bash -c "python manage.py makemigrations &&
+               python manage.py migrate &&
+               python manage.py runserver 0.0.0.0:8000"
+    ports:
+      - '8000:8000'
+    volumes:
+      - .:/app
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+  celery-worker:
+    restart: always
+    build:
+      context: .
+    command:
+      bash -c "celery -A csvgen worker -l info"
+    volumes:
+      - .:/app
+    depends_on:
+      - redis
+      - web

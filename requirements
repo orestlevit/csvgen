@@ -1,1 +1,5 @@
-Django~=
+Django~=5.0.6
+django-bootstrap4~=22.3
+Faker~=25.2.0
+celery~=5.4.0
+redis~=4.5.1
