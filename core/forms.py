@@ -1,5 +1,8 @@
 from django import forms
 from django.contrib.auth import get_user_model
+from django.forms import ModelForm
+
+from core.models import DataSet
 
 
 class RegistrationForm(forms.ModelForm):
@@ -44,3 +47,9 @@ class AuthorizationForm(forms.ModelForm):
             'username': forms.widgets.TextInput(attrs={"class": "form-control mb-3"}),
             'password': forms.widgets.TextInput(attrs={"class": "form-control mb-3"}),
         }
+
+
+class DataSetForm(ModelForm):
+    class Meta:
+        model = DataSet
+        fields = ["rows"]
