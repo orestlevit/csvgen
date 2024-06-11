@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+    <style>
+        .form-group {
+            display: flex;
+            align-items: center;
+        }
+        .form-group label {
+            display: none;
+        }
+    </style>
+    <div class="container mt-5">
+        <div class="d-flex">
+            <h3>Sample schema</h3>
+            <a href="/edit/{{ schema.id }}" class="btn btn-warning ms-5">Edit schema</a>
+        </div>
+        <div class="col-8 mt-5">
+            <table class="table table-bordered">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Column name</th>
+                    <th scope="col">Column type</th>
+                </tr>
+                {% for column in schema.column_set.all %}
+                    <tr>
+                        <td>{{ column.id }}</td>
+                        <td>{{ column.title }}</td>
+                        <td>{{ column.get_type_display }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="d-flex justify-content-between">
+            <h3>Data sets</h3>
+            <form method="post" class="d-flex">{% csrf_token %}
+                {% bootstrap_form form %}
+                <button class="btn btn-success" type="submit">Generate data</button>
+            </form>
+        </div>
+    
+        {% if not object_list %}
+        	<p>No datasets yet</p>
+        {% else %}
+        <table class="table table-bordered mt-5">
+            <tr>
+                <td>#</td>
+                <td>Created</td>
+                <td>Status</td>
+                <td>Actions</td>
+            </tr>
+            {% for object in object_list %}
+                <tr>
+                    <td>{{ object.id }}</td>
+                    <td>{{ object.created_at }}</td>
+                    <td>
+                        <p class="alert h-25
+                          {% if object.status == 'Completed' %}
+                            alert-success
+                            {% else %}
+                            btn-secondary
+                          {% endif %}">{{ object.status }}</p>
+                    </td>
+                    <td>
+                        {% if object.status == 'Completed' %}
+                        <a href="download/{{ object.id }}" class="btn btn-success">Download</a>
+                        {% else %}
+                            <span class="text-secondary">Not ready yet</span>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+
+    </div>
+{% endblock %}
