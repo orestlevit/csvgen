@@ -2,7 +2,7 @@ version: "3"
 
 services:
   web:
-    build: app
+    build: .
     container_name: csvgen
     command:
       bash -c "python manage.py makemigrations &&
@@ -22,7 +22,7 @@ services:
     build:
       context: .
     command:
-      bash -c "celery -A csvgen worker -l info"
+      bash -c "celery -A csvgen worker  -l info"
     volumes:
       - .:/app
     depends_on:

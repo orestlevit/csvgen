@@ -2,7 +2,7 @@ import os
 
 from celery import Celery
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "csvgen")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "csvgen.settings")
 app = Celery('csvgen')
 app.config_from_object('django.conf:settings', namespace='CELERY')
 app.autodiscover_tasks()
